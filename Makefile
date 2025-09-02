@@ -1,0 +1,2 @@
+run-docs:
+	mkdocs serve
