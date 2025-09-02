@@ -1,11 +1,16 @@
 site_name: XConnIO
+nav:
+  - Home: index.md
+  - Language Guides:
+      - Go: language-guides/go.md
+      - Python: language-guides/python.md
+      - Dart: language-guides/dart.md
+
 theme:
   name: material
   features:
     - navigation.instant
     - navigation.tracks
-    - navigation.sections
-    - toc.integrate
     - navigation.top
     - search.suggest
     - search.highlight
