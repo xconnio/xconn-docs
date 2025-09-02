@@ -1,0 +1,33 @@
+name: Deploy Docs
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.13'
+
+      - name: Setup environment & install dependencies
+        run: make setup
+
+      - name: Fetch gh-pages history
+        run: git fetch origin gh-pages
+
+      - name: Deploy docs using mike
+        run: |
+          VERSION=$(git rev-parse --short HEAD)
+          git config user.name "GitHub Actions"
+          git config user.email "actions@github.com"
+          mike deploy --push --update-aliases $VERSION latest
+          mike set-default --push latest

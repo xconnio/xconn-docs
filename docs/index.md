@@ -1,2 +1,2 @@
-# Welcome to XConnIO Docs
-XConnIO docs
+# Welcome to XConn Docs
+XConn docs
