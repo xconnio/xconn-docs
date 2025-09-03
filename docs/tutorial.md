@@ -616,14 +616,3 @@ The library supports multiple serializers for data serialization. You can choose
     if __name__ == "__main__":
         run(main())
     ```
-
-=== "Dart"
-
-    ``` dart
-    import "package:xconn/xconn.dart";
-
-    void main() async {
-      var client = Client(config: ClientConfig(serializer: MsgPackSerializer()));
-      var session = client.connect("ws://localhost:8080/ws", "realm1");
-    }
-    ```
