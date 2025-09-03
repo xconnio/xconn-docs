@@ -20,14 +20,3 @@ jobs:
 
       - name: Setup environment & install dependencies
         run: make setup
-
-      - name: Fetch gh-pages history
-        run: git fetch origin gh-pages
-
-      - name: Deploy docs using mike
-        run: |
-          VERSION=$(git rev-parse --short HEAD)
-          git config user.name "GitHub Actions"
-          git config user.email "actions@github.com"
-          mike deploy --push --update-aliases $VERSION latest
-          mike set-default --push latest
