@@ -1,5 +1,5 @@
 run-docs:
-	mkdocs serve
+	. .venv/bin/activate; mkdocs serve
 
 install_uv:
 	@if ! command -v uv >/dev/null 2>&1; then \
@@ -10,3 +10,6 @@ setup:
 	make install_uv
 	uv venv
 	uv pip install . -U
+
+deploy:
+	. .venv/bin/activate; mkdocs gh-deploy --force
