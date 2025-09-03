@@ -48,15 +48,11 @@ site_dir: site/docs
 plugins:
   - social
   - search
-  - mike
 
 extra:
   social:
     - icon: fontawesome/brands/github-alt
       link: https://github.com/xconnio/xconn-docs
-
-  version:
-    provider: mike
 
 markdown_extensions:
   - pymdownx.highlight:
