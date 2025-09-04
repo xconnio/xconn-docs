@@ -13,3 +13,12 @@ setup:
 
 deploy:
 	. .venv/bin/activate; mkdocs gh-deploy --force
+
+build:
+	. .venv/bin/activate; mkdocs build
+
+build-check:
+	. .venv/bin/activate; mkdocs build --strict
+
+clean:
+	rm -rf site .cache
