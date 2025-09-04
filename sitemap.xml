@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+    <url>
+         <loc>https://docs.xconn.io/xconn-docs/</loc>
+         <lastmod>2025-09-04</lastmod>
+    </url>
+    <url>
+         <loc>https://docs.xconn.io/xconn-docs/tutorial/</loc>
+         <lastmod>2025-09-04</lastmod>
+    </url>
+    <url>
+         <loc>https://docs.xconn.io/xconn-docs/language-guides/dart/</loc>
+         <lastmod>2025-09-04</lastmod>
+    </url>
+    <url>
+         <loc>https://docs.xconn.io/xconn-docs/language-guides/go/</loc>
+         <lastmod>2025-09-04</lastmod>
+    </url>
+    <url>
+         <loc>https://docs.xconn.io/xconn-docs/language-guides/python/</loc>
+         <lastmod>2025-09-04</lastmod>
+    </url>
+</urlset>
