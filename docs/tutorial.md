@@ -270,7 +270,7 @@ This tutorial demonstrates how to use XConn across multiple programming language
     from xconn.session import Session
     
     def example_call(session: Session):
-        result = session.call("io.xconn.echo", 1, 2, key="value")
+        result = session.call("io.xconn.echo", [1, 2], {"key": "value"})
         print(f"Received args={result.args}, kwargs={result.kwargs}, details={result.details}")
     ```
     
@@ -279,7 +279,7 @@ This tutorial demonstrates how to use XConn across multiple programming language
     from xconn.async_session import AsyncSession
 
     async def example_call(session: AsyncSession):
-        result = await session.call("io.xconn.echo", 1, 2, key="value")
+        result = await session.call("io.xconn.echo", [1, 2], {"key": "value"})
         print(f"Received args={result.args}, kwargs={result.kwargs}, details={result.details}")
     ```
 
