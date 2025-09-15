@@ -6,6 +6,7 @@ nav:
       - Go: language-guides/go.md
       - Python: language-guides/python.md
       - Dart: language-guides/dart.md
+      - Swift: language-guides/swift.md
 
 theme:
   name: material
