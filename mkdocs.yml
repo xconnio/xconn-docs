@@ -1,4 +1,4 @@
-site_name: XConn
+site_name: XConn Docs
 nav:
   - Overview: index.md
   - Tutorial: tutorial.md
@@ -43,8 +43,9 @@ theme:
         name: Switch to system preference
 
 repo_url: https://github.com/xconnio
-repo_name: xconnio
-site_author: omer
+edit_uri: https://github.com/xconnio/xconn-docs/edit/main/docs/
+repo_name: GitHub
+site_author: XConnIO Ltd.
 site_url: https://xconn.dev
 site_dir: site/docs
 
