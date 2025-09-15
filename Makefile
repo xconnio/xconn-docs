@@ -1,3 +1,5 @@
+.PHONY: build
+
 run-docs:
 	. .venv/bin/activate; mkdocs serve
 
