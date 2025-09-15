@@ -1,6 +1,6 @@
 site_name: XConn
 nav:
-  - Home: index.md
+  - Overview: index.md
   - Tutorial: tutorial.md
   - Language Guides:
       - Go: language-guides/go.md
@@ -45,7 +45,7 @@ theme:
 repo_url: https://github.com/xconnio
 repo_name: xconnio
 site_author: omer
-site_url: https://docs.xconn.io/xconn-docs
+site_url: https://xconn.dev
 site_dir: site/docs
 
 plugins:
@@ -55,7 +55,7 @@ plugins:
 extra:
   social:
     - icon: fontawesome/brands/github-alt
-      link: https://github.com/xconnio/
+      link: https://github.com/xconnio
 
 markdown_extensions:
   - pymdownx.highlight:
@@ -74,4 +74,4 @@ markdown_extensions:
   - attr_list
 
 copyright: |
-  &copy; 2025 <a href="https://github.com/xconnio/"  target="_blank" rel="noopener">XConnIO</a>
+  &copy; 2025 <a href="https://github.com/xconnio"  target="_blank" rel="noopener">XConnIO Ltd.</a>
