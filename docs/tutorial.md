@@ -13,8 +13,7 @@ This tutorial demonstrates how to use XConn across multiple programming language
 === "Python"
 
     ``` python
-    om26er@Home-PC:~$ uv venv
-    om26er@Home-PC:~$ uv pip install xconn
+    $ uv pip install xconn
     ```
 
 === "Dart"
