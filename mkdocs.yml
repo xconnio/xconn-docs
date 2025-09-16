@@ -7,6 +7,7 @@ nav:
       - Python: language-guides/python.md
       - Dart: language-guides/dart.md
       - Swift: language-guides/swift.md
+      - Rust: language-guides/rust.md
 
 theme:
   name: material

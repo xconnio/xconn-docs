@@ -46,6 +46,15 @@ This tutorial demonstrates how to use XConn across multiple programming language
         )
     ```
 
+=== "Rust"
+    To install `xconn-rust`, add the following to your `Cargo.toml` file:
+
+    Rust
+    ``` rust
+    [dependencies]
+    xconn = { git = "https://github.com/xconnio/xconn-rust", branch = "main" }
+    ```
+
 ## Session Creation
 
 === "Go"
@@ -108,6 +117,29 @@ This tutorial demonstrates how to use XConn across multiple programming language
 
     let client = Client()
     let session = try await client.connect(uri: "ws://localhost:8080/ws", realm: "realm1")
+    ```
+
+=== "Rust"
+    Synchronous Session
+
+    ``` rust
+    use xconn::sync::client::connect_anonymous;
+
+    fn main() {
+        let session = connect_anonymous("ws://localhost:8080", "realm1").unwrap_or_else(|e| panic!("{e}"));
+    }
+    ```
+
+    Asynchronous Session
+    ``` rust
+    use xconn::async_::client::connect_anonymous;
+
+    #[tokio::main]
+    async fn main() {
+        let session = connect_anonymous("ws://localhost:8080/ws", "realm1")
+            .await
+            .unwrap_or_else(|e| panic!("{e}"));
+    }
     ```
 
 ## Subscribe to a topic
@@ -184,6 +216,52 @@ This tutorial demonstrates how to use XConn across multiple programming language
     }
     ```
 
+=== "Rust"
+    Synchronous
+
+    ``` rust
+    use xconn::sync::session::Session;
+    use xconn::sync::types::{Event, SubscribeRequest};
+
+    fn example_subscribe(session: Session){
+        let subscribe_request = SubscribeRequest::new("io.xconn.example", event_handler);
+        match session.subscribe(subscribe_request) {
+            Ok(response) => println!("{response:?}"),
+            Err(e) => println!("{e}"),
+        }
+        println!("Subscribed to topic 'io.xconn.example'")
+    }
+
+    fn event_handler(event: Event) {
+        println!(
+            "Event Received: args={:?}, kwargs={:?}, details={:?}",
+            event.args, event.kwargs, event.details
+        );
+    }
+    ```
+
+    Asynchronous
+    ``` rust
+    use xconn::async_::session::Session;
+    use xconn::async_::types::{Event, SubscribeRequest};
+
+    async fn example_subscribe(session: Session) {
+        let subscribe_request = SubscribeRequest::new("io.xconn.example", event_handler);
+        match session.subscribe(subscribe_request).await {
+            Ok(response) => println!("{response:?}"),
+            Err(e) => println!("{e}"),
+        }
+        println!("Subscribed to topic 'io.xconn.example'")
+    }
+
+    async fn event_handler(event: Event) {
+        println!(
+            "Event Received: args={:?}, kwargs={:?}, details={:?}",
+            event.args, event.kwargs, event.details
+        );
+    }
+    ```
+
 ## Publish to a topic
 
 === "Go"
@@ -237,6 +315,44 @@ This tutorial demonstrates how to use XConn across multiple programming language
             kwargs: ["key": "value"],
         )
         print("Published to topic io.xconn.example")
+    }
+    ```
+
+=== "Rust"
+    Synchronous
+
+    ``` rust
+    use xconn::sync::session::Session;
+    use xconn::sync::types::PublishRequest;
+
+    fn example_publish(session: Session) {
+        let publish_request = PublishRequest::new("io.xconn.example")
+            .arg("test")
+            .kwarg("key", "value");
+
+        match session.publish(publish_request) {
+            Ok(response) => println!("{response:?}"),
+            Err(e) => println!("{e}"),
+        }
+        println!("Published to topic 'io.xconn.example'")
+    }
+    ```
+
+    Asynchronous
+    ``` rust
+    use xconn::async_::session::Session;
+    use xconn::async_::types::PublishRequest;
+
+    async fn example_publish(session: Session) {
+        let publish_request = PublishRequest::new("io.xconn.example")
+            .arg("test")
+            .kwarg("key", "value");
+
+        match session.publish(publish_request).await {
+            Ok(response) => println!("{response:?}"),
+            Err(e) => println!("{e}"),
+        }
+        println!("Published to topic 'io.xconn.example'")
     }
     ```
 
@@ -315,6 +431,54 @@ This tutorial demonstrates how to use XConn across multiple programming language
     }
     ```
 
+=== "Rust"
+    Synchronous
+
+    ``` rust
+    use xconn::sync::session::Session;
+    use xconn::sync::types::{Invocation, RegisterRequest, Yield};
+
+    fn example_register(session: Session) {
+        let register_request = RegisterRequest::new("io.xconn.echo", invocation_handler);
+        match session.register(register_request) {
+            Ok(response) => println!("{response:?}"),
+            Err(e) => println!("{e}"),
+        }
+        println!("Registered procedure 'io.xconn.echo'")
+    }
+
+    fn invocation_handler(inv: Invocation) -> Yield {
+        println!(
+            "Received args={:?}, kwargs={:?}, details={:?}",
+            inv.args, inv.kwargs, inv.details
+        );
+        Yield::new(inv.args, inv.kwargs)
+    }
+    ```
+
+    Asynchronous
+    ``` rust
+    use xconn::async_::session::Session;
+    use xconn::async_::types::{Invocation, RegisterRequest, Yield};
+
+    async fn example_register(session: Session) {
+        let register_request = RegisterRequest::new("io.xconn.echo", invocation_handler);
+        match session.register(register_request).await {
+            Ok(response) => println!("{response:?}"),
+            Err(e) => println!("{e}"),
+        }
+        println!("Registered procedure 'io.xconn.echo'")
+    }
+
+    async fn invocation_handler(invocation: Invocation) -> Yield {
+            println!(
+                "Received args={:?}, kwargs={:?}, details={:?}",
+                invocation.args, invocation.kwargs, invocation.details
+            );
+        Yield::new(invocation.args, invocation.kwargs)
+    }
+    ```
+
 ## Call a procedure
 
 === "Go"
@@ -369,6 +533,33 @@ This tutorial demonstrates how to use XConn across multiple programming language
         )
 
         print("Received args=\(String(describing: result.args)), kwargs=\(String(describing: result.kwargs))")
+    }
+    ```
+
+=== "Rust"
+    Synchronous
+
+    ``` rust
+    use xconn::sync::session::Session;
+    use xconn::sync::types::CallRequest;
+
+    fn example_call(session: Session) {
+        let call_request = CallRequest::new("io.xconn.echo").arg(1).arg(2).kwarg("key", "value");
+        let response = session.call(call_request).unwrap();
+        println!("Received: args={:?}, kwargs={:?}", response.args, response.kwargs);
+    }
+    ```
+
+    Asynchronous
+    ``` rust
+    use xconn::async_::session::Session;
+    use xconn::async_::types::CallRequest;
+
+    async fn example_call(session: Session) {
+        let call_request = CallRequest::new("io.xconn.echo").arg(1).arg(2).kwarg("key", "value");
+
+        let response = session.call(call_request).await.unwrap();
+        println!("Received: args={:?}, kwargs={:?}", response.args, response.kwargs);
     }
     ```
 
@@ -427,6 +618,24 @@ This tutorial demonstrates how to use XConn across multiple programming language
     let session = try await client.connect(uri: "ws://localhost:8080/ws", realm: "realm1")
     ```
 
+=== "Rust"
+    Synchronous
+
+    ``` rust
+    use xconn::sync::client::connect_ticket;
+
+    let session = connect_ticket("ws://localhost:8080", "realm1", "authid", "ticket").unwrap_or_else(|e| panic!("{e}"));
+    ```
+
+    Asynchronous
+    ``` rust
+    use xconn::async_::client::connect_ticket;
+
+    let session = connect_ticket("ws://localhost:8080/ws", "realm1", "authid", "ticket")
+        .await
+        .unwrap_or_else(|e| panic!("{e}"));
+    ```
+
 ### Challenge Response Authentication
 
 === "Go"
@@ -480,6 +689,24 @@ This tutorial demonstrates how to use XConn across multiple programming language
     let session = try await client.connect(uri: "ws://localhost:8080/ws", realm: "realm1")
     ```
 
+=== "Rust"
+    Synchronous
+
+    ``` rust
+    use xconn::sync::client::connect_wampcra;
+
+    let session = connect_wampcra("ws://localhost:8080", "realm1", "authid", "secret").unwrap_or_else(|e| panic!("{e}"));
+    ```
+
+    Asynchronous
+    ``` rust
+    use xconn::async_::client::connect_wampcra;
+
+    let session = connect_wampcra("ws://localhost:8080/ws", "realm1", "authid", "secret")
+        .await
+        .unwrap_or_else(|e| panic!("{e}"));
+    ```
+
 ### Cryptosign Authentication
 
 === "Go"
@@ -530,6 +757,24 @@ This tutorial demonstrates how to use XConn across multiple programming language
     let authenticator = try CryptoSignAuthenticator(authID: "authid", privateKey: "d850fff4ff199875c01d3e652e7205309dba2f053ae813c3d277609150adff13")
     let client = Client(authenticator: authenticator)
     let session = try await client.connect(uri: "ws://localhost:8080/ws", realm: "realm1")
+    ```
+
+=== "Rust"
+    Synchronous
+
+    ``` rust
+    use xconn::sync::client::connect_cryptosign;
+
+    let session = connect_cryptosign("ws://localhost:8080", "realm1", "authid", "d850fff4ff199875c01d3e652e7205309dba2f053ae813c3d277609150adff13").unwrap_or_else(|e| panic!("{e}"));
+    ```
+
+    Asynchronous
+    ``` rust
+    use xconn::async_::client::connect_cryptosign;
+
+    let session = connect_cryptosign("ws://localhost:8080/ws", "realm1", "authid", "d850fff4ff199875c01d3e652e7205309dba2f053ae813c3d277609150adff13")
+        .await
+        .unwrap_or_else(|e| panic!("{e}"));
     ```
 
 
@@ -592,6 +837,44 @@ The library supports multiple serializers for data serialization. You can choose
     let session = try await client.connect(uri: "ws://localhost:8080/ws", realm: "realm1")
     ```
 
+=== "Rust"
+    Synchronous
+
+    ``` rust
+    use wampproto::authenticators::anonymous::AnonymousAuthenticator;
+
+    use xconn::sync::client::Client;
+    use xconn::sync::types::JSONSerializerSpec;
+
+    fn main() {
+        let serializer = Box::new(JSONSerializerSpec {});
+        let authenticator = Box::new(AnonymousAuthenticator::new("", Default::default()));
+        let client = Client::new(serializer, authenticator);
+        let session = client
+            .connect("ws://localhost:8080/ws", "realm1")
+            .unwrap_or_else(|e| panic!("{e}"));
+    }
+    ```
+
+    Asynchronous
+    ``` rust
+    use wampproto::authenticators::anonymous::AnonymousAuthenticator;
+
+    use xconn::async_::client::Client;
+    use xconn::async_::types::JSONSerializerSpec;
+
+    #[tokio::main]
+    async fn main() {
+        let serializer = Box::new(JSONSerializerSpec {});
+        let authenticator = Box::new(AnonymousAuthenticator::new("", Default::default()));
+        let client = Client::new(serializer, authenticator);
+        let session = client
+            .connect("ws://localhost:8080/ws", "realm1")
+            .await
+            .unwrap_or_else(|e| panic!("{e}"));
+    }
+    ```
+
 ### CBOR Serializer
 === "Go"
 
@@ -648,6 +931,44 @@ The library supports multiple serializers for data serialization. You can choose
     let session = try await client.connect(uri: "ws://localhost:8080/ws", realm: "realm1")
     ```
 
+=== "Rust"
+    Synchronous
+
+    ``` rust
+    use wampproto::authenticators::anonymous::AnonymousAuthenticator;
+
+    use xconn::sync::client::Client;
+    use xconn::sync::types::CBORSerializerSpec;
+
+    fn main() {
+        let serializer = Box::new(CBORSerializerSpec {});
+        let authenticator = Box::new(AnonymousAuthenticator::new("", Default::default()));
+        let client = Client::new(serializer, authenticator);
+        let session = client
+            .connect("ws://localhost:8080/ws", "realm1")
+            .unwrap_or_else(|e| panic!("{e}"));
+    }
+    ```
+
+    Asynchronous
+    ``` rust
+    use wampproto::authenticators::anonymous::AnonymousAuthenticator;
+
+    use xconn::async_::client::Client;
+    use xconn::async_::types::CBORSerializerSpec;
+
+    #[tokio::main]
+    async fn main() {
+        let serializer = Box::new(CBORSerializerSpec {});
+        let authenticator = Box::new(AnonymousAuthenticator::new("", Default::default()));
+        let client = Client::new(serializer, authenticator);
+        let session = client
+            .connect("ws://localhost:8080/ws", "realm1")
+            .await
+            .unwrap_or_else(|e| panic!("{e}"));
+    }
+    ```
+
 ### MsgPack Serializer
 === "Go"
 
@@ -702,6 +1023,44 @@ The library supports multiple serializers for data serialization. You can choose
     ``` swift
     let client = Client(serializer: MsgPackSerializer())
     let session = try await client.connect(uri: "ws://localhost:8080/ws", realm: "realm1")
+    ```
+
+=== "Rust"
+    Synchronous
+
+    ``` rust
+    use wampproto::authenticators::anonymous::AnonymousAuthenticator;
+
+    use xconn::sync::client::Client;
+    use xconn::sync::types::MsgPackSerializerSpec;
+
+    fn main() {
+        let serializer = Box::new(MsgPackSerializerSpec {});
+        let authenticator = Box::new(AnonymousAuthenticator::new("", Default::default()));
+        let client = Client::new(serializer, authenticator);
+        let session = client
+            .connect("ws://localhost:8080/ws", "realm1")
+            .unwrap_or_else(|e| panic!("{e}"));
+    }
+    ```
+
+    Asynchronous
+    ``` rust
+    use wampproto::authenticators::anonymous::AnonymousAuthenticator;
+
+    use xconn::async_::client::Client;
+    use xconn::async_::types::MsgPackSerializerSpec;
+
+    #[tokio::main]
+    async fn main() {
+        let serializer = Box::new(MsgPackSerializerSpec {});
+        let authenticator = Box::new(AnonymousAuthenticator::new("", Default::default()));
+        let client = Client::new(serializer, authenticator);
+        let session = client
+            .connect("ws://localhost:8080/ws", "realm1")
+            .await
+            .unwrap_or_else(|e| panic!("{e}"));
+    }
     ```
 
 ### Cap'n Proto Serializer
