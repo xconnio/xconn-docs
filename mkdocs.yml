@@ -15,6 +15,7 @@ nav:
       - Dart: language-guides/dart.md
       - Swift: language-guides/swift.md
       - Rust: language-guides/rust.md
+      - Kotlin: language-guides/kotlin.md
 
 theme:
   name: material
