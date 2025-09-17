@@ -43,7 +43,6 @@ func exampleSubscribe(session *xconn.Session) {
     if subscribeResponse.Err != nil {
         log.Fatalf("Failed to subscribe: %v", subscribeResponse.Err)
     }
-    log.Printf("Subscribed to topic io.xconn.example")
 }
 
 func eventHandler(evt *xconn.Event) {
@@ -59,7 +58,6 @@ func examplePublish(session *xconn.Session) {
     if publishResponse.Err != nil {
         log.Fatalf("Failed to publish: %v", publishResponse.Err)
     }
-    log.Printf("Publsihed to topic io.xconn.example")
 }
 ```
 
@@ -71,7 +69,6 @@ func exampleRegister(session *xconn.Session) {
     if registerResponse.Err != nil {
         log.Fatalf("Failed to register: %v", registerResponse.Err)
     }
-    log.Printf("Registered procedure io.xconn.example")
 }
 
 func invocationHandler(ctx context.Context, inv *xconn.Invocation) *xconn.InvocationResult {
@@ -87,7 +84,6 @@ func exampleCall(session *xconn.Session) {
     if callResponse.Err != nil {
         log.Fatalf("Failed to call: %v", callResponse.Err)
     }
-    log.Printf("Call result: args=%s, kwargs=%s, details=%s", callResponse.Args, callResponse.Kwargs, callResponse.Details)
 }
 ```
 

@@ -38,7 +38,6 @@ fn example_subscribe(session: Session){
         Ok(response) => println!("{response:?}"),
         Err(e) => println!("{e}"),
     }
-    println!("Subscribed to topic 'io.xconn.example'")
 }
 
 fn event_handler(event: Event) {
@@ -63,7 +62,6 @@ fn example_publish(session: Session) {
         Ok(response) => println!("{response:?}"),
         Err(e) => println!("{e}"),
     }
-    println!("Published to topic 'io.xconn.example'")
 }
 ```
 
@@ -96,8 +94,7 @@ use xconn::sync::types::CallRequest;
 
 fn example_call(session: Session) {
     let call_request = CallRequest::new("io.xconn.echo").arg(1).arg(2).kwarg("key", "value");
-    let response = session.call(call_request).unwrap();
-    println!("Received: args={:?}, kwargs={:?}", response.args, response.kwargs);
+    session.call(call_request).unwrap();
 }
 ```
 
@@ -150,7 +147,6 @@ async fn example_subscribe(session: Session) {
         Ok(response) => println!("{response:?}"),
         Err(e) => println!("{e}"),
     }
-    println!("Subscribed to topic 'io.xconn.example'")
 }
 
 async fn event_handler(event: Event) {
@@ -175,7 +171,6 @@ async fn example_publish(session: Session) {
         Ok(response) => println!("{response:?}"),
         Err(e) => println!("{e}"),
     }
-    println!("Published to topic 'io.xconn.example'")
 }
 ```
 
@@ -209,8 +204,7 @@ use xconn::async_::types::CallRequest;
 async fn example_call(session: Session) {
     let call_request = CallRequest::new("io.xconn.example").arg(1).arg(2).kwarg("key", "value");
 
-    let response = session.call(call_request).await.unwrap();
-    println!("Received: args={:?}, kwargs={:?}", response.args, response.kwargs);
+    session.call(call_request).await.unwrap();
 }
 ```
 

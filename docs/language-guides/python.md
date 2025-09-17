@@ -58,7 +58,6 @@ from xconn.session import Session
 
 def example_subscribe(session: Session):
     session.subscribe("io.xconn.example", event_handler)
-    print("Subscribed to topic 'io.xconn.example'")
 
 
 def event_handler(event: Event):
@@ -71,7 +70,6 @@ from xconn.session import Session
 
 def example_publish(session: Session):
     session.publish("io.xconn.example", ["test"])
-    print("Published to topic io.xconn.example")
 ```
 
 #### Register a procedure
@@ -92,8 +90,7 @@ def invocation_handler(invocation: Invocation):
 from xconn.session import Session
 
 def example_call(session: Session):
-    result = session.call("io.xconn.example", ["1", "2"], {"key": "value"})
-    print(f"Received args={result.args}, kwargs={result.kwargs}, details={result.details}")
+    session.call("io.xconn.example", ["1", "2"], {"key": "value"})
 ```
 
 #### Authentication
@@ -145,7 +142,6 @@ from xconn.async_session import AsyncSession
 
 async def example_subscribe(session: AsyncSession):
     await session.subscribe("io.xconn.example", event_handler)
-    print("Subscribed to topic 'io.xconn.example'")
 
 
 async def event_handler(event: Event):
@@ -158,7 +154,6 @@ from xconn.async_session import AsyncSession
 
 async def example_publish(session: AsyncSession):
     await session.publish("io.xconn.example", ["test"])
-    print("Published to topic io.xconn.example")
 ```
 
 #### Register a procedure
@@ -179,8 +174,7 @@ async def invocation_handler(invocation: Invocation):
 from xconn.async_session import AsyncSession
 
 async def example_call(session: AsyncSession):
-    result = await session.call("io.xconn.example", ["1", "2"], {"key": "value"})
-    print(f"Received args={result.args}, kwargs={result.kwargs}, details={result.details}")
+    await session.call("io.xconn.example", ["1", "2"], {"key": "value"})
 ```
 
 #### Authentication

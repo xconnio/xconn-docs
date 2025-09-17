@@ -175,7 +175,6 @@ This tutorial demonstrates how to use XConn across multiple programming language
     if subscribeResponse.Err != nil {
         log.Fatalf("Failed to subscribe: %v", subscribeResponse.Err)
     }
-    log.Printf("Subscribed to topic io.xconn.example")
     }
     
     func eventHandler(evt *xconn.Event) {
@@ -192,7 +191,6 @@ This tutorial demonstrates how to use XConn across multiple programming language
     
     def example_subscribe(session: Session):
         session.subscribe("io.xconn.example", event_handler)
-        print("Subscribed to topic 'io.xconn.example'")
     
     
     def event_handler(event: Event):
@@ -206,7 +204,6 @@ This tutorial demonstrates how to use XConn across multiple programming language
     
     async def example_subscribe(session: AsyncSession):
         await session.subscribe("io.xconn.example", event_handler)
-        print("Subscribed to topic 'io.xconn.example'")
     
     
     async def event_handler(event: Event):
@@ -217,8 +214,7 @@ This tutorial demonstrates how to use XConn across multiple programming language
 
     ``` dart
     void exampleSubscribe(Session session) async {
-      var subscription = await session.subscribe("io.xconn.example", eventHandler);
-      print("Subscribed to topic io.xconn.example");
+      await session.subscribe("io.xconn.example", eventHandler);
     }
     
     void eventHandler(Event event) {
@@ -231,7 +227,6 @@ This tutorial demonstrates how to use XConn across multiple programming language
     ``` swift
     func exampleSubscribe(_ session: Session) {
         try await session.subscribe(topic: "io.xconn.example", endpoint: eventHandler)
-        print("Subscribed to topic io.xconn.example")
     }
 
     func eventHandler(_ event: Event) {
@@ -252,7 +247,6 @@ This tutorial demonstrates how to use XConn across multiple programming language
             Ok(response) => println!("{response:?}"),
             Err(e) => println!("{e}"),
         }
-        println!("Subscribed to topic 'io.xconn.example'")
     }
 
     fn event_handler(event: Event) {
@@ -274,7 +268,6 @@ This tutorial demonstrates how to use XConn across multiple programming language
             Ok(response) => println!("{response:?}"),
             Err(e) => println!("{e}"),
         }
-        println!("Subscribed to topic 'io.xconn.example'")
     }
 
     async fn event_handler(event: Event) {
@@ -292,7 +285,6 @@ This tutorial demonstrates how to use XConn across multiple programming language
         session.subscribe("io.xconn.example", { event ->
             print("Event Received: args=${event.args}, kwargs=${event.kwargs}, details=${event.details}")
         }).await()
-        print("Subscribed to topic 'io.xconn.example'")
     }
     ```
 
@@ -306,7 +298,6 @@ This tutorial demonstrates how to use XConn across multiple programming language
     if publishResponse.Err != nil {
         log.Fatalf("Failed to publish: %v", publishResponse.Err)
     }
-    log.Printf("Publsihed to topic io.xconn.example")
     }
     ```
 
@@ -318,7 +309,6 @@ This tutorial demonstrates how to use XConn across multiple programming language
 
     def example_publish(session: Session):
         session.publish("io.xconn.example", ["test"], {"key": "value"})
-        print("Published to topic io.xconn.example")
     ```
     
     Asynchronous
@@ -327,7 +317,6 @@ This tutorial demonstrates how to use XConn across multiple programming language
 
     async def example_publish(session: AsyncSession):
         await session.publish("io.xconn.example", ["test"], {"key": "value"})
-        print("Published to topic io.xconn.example")
     ```
 
 === "Dart"
@@ -335,7 +324,6 @@ This tutorial demonstrates how to use XConn across multiple programming language
     ``` dart
     void examplePublish(Session session) async {
       await session.publish("io.xconn.example", args: ["test"], kwargs: {"key": "value"});
-      print("Published to topic io.xconn.example");
     }
     ```
 
@@ -348,7 +336,6 @@ This tutorial demonstrates how to use XConn across multiple programming language
             args: ["test"],
             kwargs: ["key": "value"],
         )
-        print("Published to topic io.xconn.example")
     }
     ```
 
@@ -368,7 +355,6 @@ This tutorial demonstrates how to use XConn across multiple programming language
             Ok(response) => println!("{response:?}"),
             Err(e) => println!("{e}"),
         }
-        println!("Published to topic 'io.xconn.example'")
     }
     ```
 
@@ -386,7 +372,6 @@ This tutorial demonstrates how to use XConn across multiple programming language
             Ok(response) => println!("{response:?}"),
             Err(e) => println!("{e}"),
         }
-        println!("Published to topic 'io.xconn.example'")
     }
     ```
 
@@ -395,7 +380,6 @@ This tutorial demonstrates how to use XConn across multiple programming language
     ```kotlin
     suspend fun examplePublish(session: Session) {
         session.publish("io.xconn.example", args = listOf("test"), kwargs = mapOf("key" to "value"))?.await()
-        print("Published to topic 'io.xconn.example'")
     }
     ```
 
@@ -409,7 +393,6 @@ This tutorial demonstrates how to use XConn across multiple programming language
     if registerResponse.Err != nil {
         log.Fatalf("Failed to register: %v", registerResponse.Err)
     }
-    log.Printf("Registered procedure io.xconn.echo")
     }
     
     func invocationHandler(ctx context.Context, inv *xconn.Invocation) *xconn.InvocationResult {
@@ -426,7 +409,6 @@ This tutorial demonstrates how to use XConn across multiple programming language
     
     def example_register(session: Session):
         session.register("io.xconn.echo", invocation_handler)
-        print("Registered procedure io.xconn.echo")
     
     
     def invocation_handler(invocation: Invocation):
@@ -440,7 +422,6 @@ This tutorial demonstrates how to use XConn across multiple programming language
     
     async def example_register(session: AsyncSession):
         await session.register("io.xconn.echo", invocation_handler)
-        print("Registered procedure io.xconn.echo")
     
     
     async def invocation_handler(invocation: Invocation):
@@ -452,7 +433,6 @@ This tutorial demonstrates how to use XConn across multiple programming language
     ``` dart
     void exampleRegister(Session session) async {
       var registration = await session.register("io.xconn.echo", invocationHandler);
-      print("Registered procedure io.xconn.echo");
     }
     
     Result invocationHandler(Invocation invocation) {
@@ -465,11 +445,9 @@ This tutorial demonstrates how to use XConn across multiple programming language
     ``` swift
     func exampleRegister(_ session: Session) {
         try await session.register(procedure: "io.xconn.echo", endpoint: echoHandler)
-        print("Registered procedure io.xconn.echo")
     }
 
     func echoHandler(_ invocation: Invocation) -> Result {
-        print("Received args=\(String(describing: invocation.args)), kwargs=\(String(describing: invocation.kwargs))")
         return Result(args: invocation.args, kwargs: invocation.kwargs)
     }
     ```
@@ -487,14 +465,9 @@ This tutorial demonstrates how to use XConn across multiple programming language
             Ok(response) => println!("{response:?}"),
             Err(e) => println!("{e}"),
         }
-        println!("Registered procedure 'io.xconn.echo'")
     }
 
     fn invocation_handler(inv: Invocation) -> Yield {
-        println!(
-            "Received args={:?}, kwargs={:?}, details={:?}",
-            inv.args, inv.kwargs, inv.details
-        );
         Yield::new(inv.args, inv.kwargs)
     }
     ```
@@ -510,14 +483,9 @@ This tutorial demonstrates how to use XConn across multiple programming language
             Ok(response) => println!("{response:?}"),
             Err(e) => println!("{e}"),
         }
-        println!("Registered procedure 'io.xconn.echo'")
     }
 
     async fn invocation_handler(invocation: Invocation) -> Yield {
-            println!(
-                "Received args={:?}, kwargs={:?}, details={:?}",
-                invocation.args, invocation.kwargs, invocation.details
-            );
         Yield::new(invocation.args, invocation.kwargs)
     }
     ```
@@ -529,7 +497,6 @@ This tutorial demonstrates how to use XConn across multiple programming language
         session.register("io.xconn.echo", { invocation ->
             Result(args = invocation.args, kwargs = invocation.kwargs)
         }).await()
-        print("Registered procedure 'io.xconn.echo'")
     }
     ```
 
@@ -543,7 +510,6 @@ This tutorial demonstrates how to use XConn across multiple programming language
     if callResponse.Err != nil {
         log.Fatalf("Failed to call: %v", callResponse.Err)
     }
-    log.Printf("Call result: args=%s, kwargs=%s, details=%s", callResponse.Args, callResponse.Kwargs, callResponse.Details)
     }
     ```
 
@@ -554,8 +520,7 @@ This tutorial demonstrates how to use XConn across multiple programming language
     from xconn.session import Session
     
     def example_call(session: Session):
-        result = session.call("io.xconn.echo", [1, 2], {"key": "value"})
-        print(f"Received args={result.args}, kwargs={result.kwargs}, details={result.details}")
+        session.call("io.xconn.echo", [1, 2], {"key": "value"})
     ```
     
     Asynchronous
@@ -563,16 +528,14 @@ This tutorial demonstrates how to use XConn across multiple programming language
     from xconn.async_session import AsyncSession
 
     async def example_call(session: AsyncSession):
-        result = await session.call("io.xconn.echo", [1, 2], {"key": "value"})
-        print(f"Received args={result.args}, kwargs={result.kwargs}, details={result.details}")
+        await session.call("io.xconn.echo", [1, 2], {"key": "value"})
     ```
 
 === "Dart"
 
     ``` dart
     void exampleCall(Session session) async {
-      var result = await session.call("io.xconn.echo", args: [1, 2], kwargs: {"key": "value"});
-      print("Call result: args=${result.args}, kwargs=${result.kwargs}, details=${result.details}");
+      await session.call("io.xconn.echo", args: [1, 2], kwargs: {"key": "value"});
     }
     ```
 
@@ -580,13 +543,11 @@ This tutorial demonstrates how to use XConn across multiple programming language
 
     ``` swift
     func exampleCall(_ session: Session) {
-        let result = try await session.call(
+        try await session.call(
             procedure: "io.xconn.echo",
             args: [1, 2],
             kwargs: ["key": "value"]
         )
-
-        print("Received args=\(String(describing: result.args)), kwargs=\(String(describing: result.kwargs))")
     }
     ```
 
@@ -599,8 +560,7 @@ This tutorial demonstrates how to use XConn across multiple programming language
 
     fn example_call(session: Session) {
         let call_request = CallRequest::new("io.xconn.echo").arg(1).arg(2).kwarg("key", "value");
-        let response = session.call(call_request).unwrap();
-        println!("Received: args={:?}, kwargs={:?}", response.args, response.kwargs);
+        session.call(call_request).unwrap();
     }
     ```
 
@@ -612,8 +572,7 @@ This tutorial demonstrates how to use XConn across multiple programming language
     async fn example_call(session: Session) {
         let call_request = CallRequest::new("io.xconn.echo").arg(1).arg(2).kwarg("key", "value");
 
-        let response = session.call(call_request).await.unwrap();
-        println!("Received: args={:?}, kwargs={:?}", response.args, response.kwargs);
+        session.call(call_request).await.unwrap();
     }
     ```
 
@@ -621,12 +580,11 @@ This tutorial demonstrates how to use XConn across multiple programming language
 
     ```kotlin
     suspend fun exampleCall(session: Session) {
-        val result = session.call(
+        session.call(
             "io.xconn.echo",
             args = listOf(1, 2),
             kwargs = mapOf("key" to "value")
         ).await()
-        print("Received: args=${result.args}, kwargs=${result.kwargs}, details=${result.details}");
     }
     ```
 
