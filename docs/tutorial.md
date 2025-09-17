@@ -54,6 +54,16 @@ This tutorial demonstrates how to use XConn across multiple programming language
     xconn = { git = "https://github.com/xconnio/xconn-rust", branch = "main" }
     ```
 
+=== "Kotlin"
+    To install `xconn-kotlin`, add the following in your `build.gradle` file:
+
+    Kotlin
+    ```kotlin
+    dependencies {
+        implementation("io.xconn:xconn:0.1.0-alpha.3")
+    }
+    ```
+
 ## Session Creation
 
 === "Go"
@@ -139,6 +149,20 @@ This tutorial demonstrates how to use XConn across multiple programming language
             .await
             .unwrap_or_else(|e| panic!("{e}"));
     }
+    ```
+
+=== "Kotlin"
+
+    ```kotlin
+    package io.xconn
+
+    import io.xconn.xconn.connectAnonymous
+    import kotlinx.coroutines.runBlocking
+
+    fun main() =
+        runBlocking {
+            val session = connectAnonymous()
+        }
     ```
 
 ## Subscribe to a topic
@@ -261,6 +285,17 @@ This tutorial demonstrates how to use XConn across multiple programming language
     }
     ```
 
+=== "Kotlin"
+
+    ```kotlin
+    suspend fun exampleSubscribe(session: Session) {
+        session.subscribe("io.xconn.example", { event ->
+            print("Event Received: args=${event.args}, kwargs=${event.kwargs}, details=${event.details}")
+        }).await()
+        print("Subscribed to topic 'io.xconn.example'")
+    }
+    ```
+
 ## Publish to a topic
 
 === "Go"
@@ -352,6 +387,15 @@ This tutorial demonstrates how to use XConn across multiple programming language
             Err(e) => println!("{e}"),
         }
         println!("Published to topic 'io.xconn.example'")
+    }
+    ```
+
+=== "Kotlin"
+
+    ```kotlin
+    suspend fun examplePublish(session: Session) {
+        session.publish("io.xconn.example", args = listOf("test"), kwargs = mapOf("key" to "value"))?.await()
+        print("Published to topic 'io.xconn.example'")
     }
     ```
 
@@ -478,6 +522,17 @@ This tutorial demonstrates how to use XConn across multiple programming language
     }
     ```
 
+=== "Kotlin"
+
+    ```kotlin
+    suspend fun exampleRegister(session: Session) {
+        session.register("io.xconn.echo", { invocation ->
+            Result(args = invocation.args, kwargs = invocation.kwargs)
+        }).await()
+        print("Registered procedure 'io.xconn.echo'")
+    }
+    ```
+
 ## Call a procedure
 
 === "Go"
@@ -562,6 +617,19 @@ This tutorial demonstrates how to use XConn across multiple programming language
     }
     ```
 
+=== "Kotlin"
+
+    ```kotlin
+    suspend fun exampleCall(session: Session) {
+        val result = session.call(
+            "io.xconn.echo",
+            args = listOf(1, 2),
+            kwargs = mapOf("key" to "value")
+        ).await()
+        print("Received: args=${result.args}, kwargs=${result.kwargs}, details=${result.details}");
+    }
+    ```
+
 ## Authentication
 
 ### Ticket Authentication
@@ -635,6 +703,16 @@ This tutorial demonstrates how to use XConn across multiple programming language
         .unwrap_or_else(|e| panic!("{e}"));
     ```
 
+=== "Kotlin"
+
+    ```kotlin
+    import io.xconn.xconn.connectTicket
+
+
+    val session = connectTicket("ws://localhost:8080/ws", "realm1", "authid", "ticket")
+    ```
+
+
 ### Challenge Response Authentication
 
 === "Go"
@@ -706,6 +784,15 @@ This tutorial demonstrates how to use XConn across multiple programming language
         .unwrap_or_else(|e| panic!("{e}"));
     ```
 
+=== "Kotlin"
+
+    ```kotlin
+    import io.xconn.xconn.connectCRA
+
+
+    val session = connectCRA("ws://localhost:8080/ws", "realm1", "authid", "secret")
+    ```
+
 ### Cryptosign Authentication
 
 === "Go"
@@ -774,6 +861,15 @@ This tutorial demonstrates how to use XConn across multiple programming language
     let session = connect_cryptosign("ws://localhost:8080/ws", "realm1", "authid", "d850fff4ff199875c01d3e652e7205309dba2f053ae813c3d277609150adff13")
         .await
         .unwrap_or_else(|e| panic!("{e}"));
+    ```
+
+=== "Kotlin"
+
+    ```kotlin
+    import io.xconn.xconn.connectCryptosign
+
+
+    val session = connectCryptosign("ws://localhost:8080/ws", "realm1", "authid", "d850fff4ff199875c01d3e652e7205309dba2f053ae813c3d277609150adff13")
     ```
 
 
@@ -874,6 +970,17 @@ The library supports multiple serializers for data serialization. You can choose
     }
     ```
 
+=== "Kotlin"
+
+    ``` kotlin
+    import io.xconn.wampproto.serializers.JSONSerializer
+    import io.xconn.xconn.Client
+
+
+    val client = Client(serializer = JSONSerializer())
+    val session = client.connect("ws://localhost:8080/ws", "realm1")
+    ```
+
 ### CBOR Serializer
 === "Go"
 
@@ -968,6 +1075,17 @@ The library supports multiple serializers for data serialization. You can choose
     }
     ```
 
+=== "Kotlin"
+
+    ``` kotlin
+    import io.xconn.wampproto.serializers.CBORSerializer
+    import io.xconn.xconn.Client
+
+
+    val client = Client(serializer = CBORSerializer())
+    val session = client.connect("ws://localhost:8080/ws", "realm1")
+    ```
+
 ### MsgPack Serializer
 === "Go"
 
@@ -1060,6 +1178,17 @@ The library supports multiple serializers for data serialization. You can choose
             .await
             .unwrap_or_else(|e| panic!("{e}"));
     }
+    ```
+
+=== "Kotlin"
+
+    ``` kotlin
+    import io.xconn.wampproto.serializers.MsgPackSerializer
+    import io.xconn.xconn.Client
+
+
+    val client = Client(serializer = MsgPackSerializer())
+    val session = client.connect("ws://localhost:8080/ws", "realm1")
     ```
 
 ### Cap'n Proto Serializer
