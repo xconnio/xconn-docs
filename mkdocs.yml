@@ -9,6 +9,7 @@ site_dir: site
 nav:
   - Overview: index.md
   - Tutorial: tutorial.md
+  - Nxt Router: nxt.md
   - Language Guides:
       - Go: language-guides/go.md
       - Python: language-guides/python.md
