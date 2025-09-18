@@ -10,9 +10,21 @@ We recommend using a [Nxt](https://xconn.dev/nxt/) router, a lightweight and hig
 
 To install `xconn-kotlin`, add the following in your `build.gradle` file:
 
+### Install from maven central
+
 ```kotlin
 dependencies {
     implementation("io.xconn:xconn:0.1.0-alpha.3")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.10.2")
+}
+```
+
+### Install from github
+
+```kotlin
+dependencies {
+    implementation("com.github.xconnio.xconn-kotlin:xconn:340feea4fb")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.10.2")
 }
 ```
 
@@ -24,12 +36,10 @@ Creating a client:
 package io.xconn
 
 import io.xconn.xconn.connectAnonymous
-import kotlinx.coroutines.runBlocking
 
-fun main() =
-    runBlocking {
-        val session = connectAnonymous()
-    }
+suspend fun main() {
+    val session = connectAnonymous()
+}
 ```
 
 Once the session is established, you can perform WAMP actions. Below are examples of all 4 WAMP
