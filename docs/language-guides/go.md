@@ -2,6 +2,11 @@
 
 WAMP v2 Router and Client for go.
 
+## Prerequisites
+Before creating or running a client, you must have a WAMP router running. The client needs to connect to a router to send and receive messages, so this step is essential.
+
+We recommend using a [Nxt](https://xconn.dev/nxt/) router, a lightweight and high-performance WAMP router built for flexibility and speed.
+
 ## Installation
 
 To install `xconn`, use the following command:
