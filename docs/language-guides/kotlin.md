@@ -42,7 +42,6 @@ suspend fun exampleSubscribe(session: Session) {
     session.subscribe("io.xconn.example", { event ->
         print("Received Event: args=${event.args}, kwargs=${event.kwargs}, details=${event.details}")
     }).await()
-    print("Subscribed to topic 'io.xconn.example'")
 }
 ```
 
@@ -51,7 +50,6 @@ suspend fun exampleSubscribe(session: Session) {
 ```kotlin
 suspend fun examplePublish(session: Session) {
     session.publish("io.xconn.example", args = listOf("test"), kwargs = mapOf("key" to "value"))?.await()
-    print("Published to topic 'io.xconn.example'")
 }
 ```
 
@@ -62,7 +60,6 @@ suspend fun exampleRegister(session: Session) {
     session.register("io.xconn.echo", { invocation ->
         Result(args = invocation.args, kwargs = invocation.kwargs)
     }).await()
-    print("Registered procedure 'io.xconn.echo'")
 }
 ```
 
@@ -75,7 +72,6 @@ suspend fun exampleCall(session: Session) {
         args = listOf(1, 2),
         kwargs = mapOf("key" to "value")
     ).await()
-    print("Call result: args=${result.args}, kwargs=${result.kwargs}, details=${result.details}");
 }
 ```
 

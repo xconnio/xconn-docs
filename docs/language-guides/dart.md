@@ -43,7 +43,6 @@ operations:
 ```dart
 void exampleSubscribe(Session session) async {
   var subscription = await session.subscribe("io.xconn.example", eventHandler);
-  print("Subscribed to topic io.xconn.example");
 }
 
 void eventHandler(Event event) {
@@ -56,7 +55,6 @@ void eventHandler(Event event) {
 ```dart
 void examplePublish(Session session) async {
   await session.publish("io.xconn.example", args: ["Hello World!", 100], kwargs: {"xconn": "dart"});
-  print("Published to topic io.xconn.example");
 }
 ```
 
@@ -65,7 +63,6 @@ void examplePublish(Session session) async {
 ```dart
 void exampleRegister(Session session) async {
   var registration = await session.register("io.xconn.echo", invocationHandler);
-  print("Registered procedure io.xconn.echo");
 }
 
 Result invocationHandler(Invocation invocation) {
@@ -77,8 +74,7 @@ Result invocationHandler(Invocation invocation) {
 
 ```dart
 void exampleCall(Session session) async {
-  var result = await session.call("io.xconn.echo", args: ["Hello World!"], kwargs: {"number": 100});
-  print("Call result: args=${result.args}, kwargs=${result.kwargs}, details=${result.details}");
+  await session.call("io.xconn.echo", args: ["Hello World!"], kwargs: {"number": 100});
 }
 ```
 
