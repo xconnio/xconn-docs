@@ -37,14 +37,13 @@ nxt start
 That should show below logs:
 
 ```shell
-$ nxt start
 listening websocket on ws://localhost:8080
 listening rawsocket on rs:///tmp/nxt.sock
 ```
 
 This starts two instances of router:  
 
-1. Websocket Transport which listens at: `ws://localhost:8080`
-2. Rawsocket Transport which listens at: `rs:///tmp/nxt.sock`
+1. WebSocket Transport which listens at: `ws://localhost:8080`
+2. RawSocket Transport which listens at: `rs:///tmp/nxt.sock`
 
 Now just write a component in any programming langauge that has a WAMP client.
