@@ -1,19 +1,17 @@
 # Use for Python
-Real-time application development framework for Python. XConn enables backend APIs that are FAST, support PubSub and
+Real-time application development framework for Python. XConn enables backend APIs that are fast, support PubSub and
 are secure.
 
 ## Prerequisites
-Before creating or running a client, you must have a WAMP router running. The client needs to connect to a router to send and receive messages, so this step is essential.
+Before running a client, you need have a WAMP router running. The client needs to connect to a router to send and receive messages, so this step is essential.
 
 We recommend using a [Nxt](https://xconn.dev/nxt/) router, a lightweight and high-performance WAMP router built for flexibility and speed.
 
 ## Getting started
 Install xconn from pypi
 ```shell
-om26er@Home-PC:~$ uv venv
-om26er@Home-PC:~$ uv pip install xconn
-om26er@Home-PC:~$ source .venv/bin/activate
-(xconn-python) om26er@Home-PC:~$
+uv venv
+uv pip install xconn
 ```
 
 Save the below code in sample.py
@@ -32,9 +30,9 @@ async def my_procedure(first_name: str, last_name: str, age: int):
 async def my_topic():
     print("received event...")
 ```
-run the app with xcorn command (note: this automatically starts the debug router)
+run the app with xcorn command (note: this automatically starts a debug router)
 ```shell
-(xconn-python) om26er@Home-PC:~$ xcorn sample:app --start-router
+uv run xcorn sample:app --start-router
 starting server on 127.0.0.1:8080
 connected realm1
 Registered procedure io.xconn.hello
