@@ -70,6 +70,16 @@ We recommend using a [Nxt](https://xconn.dev/nxt/) router, a lightweight and hig
     }
     ```
 
+=== "Typescript"
+    To install `xconn-typescript`, add the following in your `package.json` file:
+
+    Typescript
+    ```typescript
+    "dependencies": {
+        "xconn": "github:xconnio/xconn-ts#13fbafb2c8e1e30a1cf13803fd207f5705270e24"
+    }
+    ```
+
 ## Session Creation
 
 === "Go"
@@ -169,6 +179,21 @@ We recommend using a [Nxt](https://xconn.dev/nxt/) router, a lightweight and hig
         runBlocking {
             val session = connectAnonymous()
         }
+    ```
+
+=== "Typescript"
+
+    ```typescript
+    import {connectAnonymous} from "xconn";
+
+
+    async function main() {
+        const session = await connectAnonymous("ws://localhost:8080/ws", "realm1")
+    }
+
+    main().catch((err) => {
+        console.error("Error:", err);
+    });
     ```
 
 ## Subscribe to a topic
@@ -294,6 +319,21 @@ We recommend using a [Nxt](https://xconn.dev/nxt/) router, a lightweight and hig
     }
     ```
 
+=== "Typescript"
+
+    ```typescript
+    import {Event, Session} from "xconn";
+
+
+    async function exampleSubscribe(session: Session) {
+        const onEvent = (event: Event) => {
+            console.log(`Received Event: args=${event.args}, kwargs=${event.kwargs}, details=${event.details}`);
+        };
+
+        await session.subscribe("io.xconn.example", onEvent);
+    }
+    ```
+
 ## Publish to a topic
 
 === "Go"
@@ -386,6 +426,17 @@ We recommend using a [Nxt](https://xconn.dev/nxt/) router, a lightweight and hig
     ```kotlin
     suspend fun examplePublish(session: Session) {
         session.publish("io.xconn.example", args = listOf("test"), kwargs = mapOf("key" to "value"))?.await()
+    }
+    ```
+
+=== "Typescript"
+
+    ```typescript
+    import {Session} from "xconn";
+
+
+    async function examplePublish(session: Session) {
+        await session.publish("io.xconn.example", {args: ["test"], kwargs: {"key": "value"}});
     }
     ```
 
@@ -506,6 +557,21 @@ We recommend using a [Nxt](https://xconn.dev/nxt/) router, a lightweight and hig
     }
     ```
 
+=== "Typescript"
+
+    ```typescript
+    import {Session, Invocation, Result} from "xconn";
+
+
+    async function exampleRegister(session: Session) {
+        const onEcho = (invocation: Invocation): Result => {
+            return new Result(invocation.args, invocation.kwargs, invocation.details);
+        };
+
+        await session.register("io.xconn.echo", onEcho);
+    }
+    ```
+
 ## Call a procedure
 
 === "Go"
@@ -594,6 +660,17 @@ We recommend using a [Nxt](https://xconn.dev/nxt/) router, a lightweight and hig
     }
     ```
 
+=== "Typescript"
+
+    ```typescript
+    import {Session} from "xconn";
+
+
+    async function exampleCall(session: Session) {
+        await session.call("io.xconn.echo", {args: [1, 2], kwargs: {"key": "value"}});
+    }
+    ```
+
 ## Authentication
 
 ### Ticket Authentication
@@ -674,6 +751,15 @@ We recommend using a [Nxt](https://xconn.dev/nxt/) router, a lightweight and hig
 
 
     val session = connectTicket("ws://localhost:8080/ws", "realm1", "authid", "ticket")
+    ```
+
+=== "Typescript"
+
+    ```Typescript
+    import {connectTicket} from "xconn";
+
+
+    const session = await connectTicket("ws://localhost:8080/ws", "realm1", "authid", "ticket");
     ```
 
 
@@ -757,6 +843,15 @@ We recommend using a [Nxt](https://xconn.dev/nxt/) router, a lightweight and hig
     val session = connectCRA("ws://localhost:8080/ws", "realm1", "authid", "secret")
     ```
 
+=== "Typescript"
+
+    ```Typescript
+    import {connectCRA} from "xconn";
+
+
+    const session = await connectTicket("ws://localhost:8080/ws", "realm1", "authid", "secret");
+    ```
+
 ### Cryptosign Authentication
 
 === "Go"
@@ -834,6 +929,15 @@ We recommend using a [Nxt](https://xconn.dev/nxt/) router, a lightweight and hig
 
 
     val session = connectCryptosign("ws://localhost:8080/ws", "realm1", "authid", "d850fff4ff199875c01d3e652e7205309dba2f053ae813c3d277609150adff13")
+    ```
+
+=== "Typescript"
+
+    ```Typescript
+    import {connectCryptosign} from "xconn";
+
+
+    const session = await connectCryptosign("ws://localhost:8080/ws", "realm1", "authid", "d850fff4ff199875c01d3e652e7205309dba2f053ae813c3d277609150adff13");
     ```
 
 
@@ -945,6 +1049,18 @@ The library supports multiple serializers for data serialization. You can choose
     val session = client.connect("ws://localhost:8080/ws", "realm1")
     ```
 
+=== "Typescript"
+
+    ``` typescript
+    import {Client, JSONSerializer} from "xconn";
+
+
+    async function main() {
+        const client = new Client({serializer: new JSONSerializer()});
+        const session = await client.connect("ws://localhost:8080/ws", "realm1");
+    }
+    ```
+
 ### CBOR Serializer
 === "Go"
 
@@ -1050,6 +1166,18 @@ The library supports multiple serializers for data serialization. You can choose
     val session = client.connect("ws://localhost:8080/ws", "realm1")
     ```
 
+=== "Typescript"
+
+    ``` typescript
+    import {Client, CBORSerializer} from "xconn";
+
+
+    async function main() {
+        const client = new Client({serializer: new CBORSerializer()});
+        const session = await client.connect("ws://localhost:8080/ws", "realm1");
+    }
+    ```
+
 ### MsgPack Serializer
 === "Go"
 
@@ -1153,6 +1281,18 @@ The library supports multiple serializers for data serialization. You can choose
 
     val client = Client(serializer = MsgPackSerializer())
     val session = client.connect("ws://localhost:8080/ws", "realm1")
+    ```
+
+=== "Typescript"
+
+    ``` typescript
+    import {Client, MsgPackSerializer} from "xconn";
+
+
+    async function main() {
+        const client = new Client({serializer: new MsgPackSerializer()});
+        const session = await client.connect("ws://localhost:8080/ws", "realm1");
+    }
     ```
 
 ### Cap'n Proto Serializer
