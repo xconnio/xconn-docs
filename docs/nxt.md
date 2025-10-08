@@ -1,4 +1,4 @@
-# Nxt Router
+# NXT Router
 
 A next-generation WAMP router for modern real-time apps.
 
@@ -46,4 +46,4 @@ This starts two instances of router:
 1. WebSocket Transport which listens at: `ws://localhost:8080`
 2. RawSocket Transport which listens at: `rs:///tmp/nxt.sock`
 
-Now just write a component in any programming langauge that has a WAMP client.
+Now just write a component in any programming language that has a WAMP client.

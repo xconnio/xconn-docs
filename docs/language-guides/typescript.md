@@ -1,15 +1,15 @@
-# Use for typescript
+# Use for JavaScript
 
 A TypeScript WAMP client library built for both browser and Node.js environments.
 
 ## Prerequisites
 Before creating or running a client, you must have a WAMP router running. The client needs to connect to a router to send and receive messages, so this step is essential.
 
-We recommend using a [Nxt](https://xconn.dev/nxt/) router, a lightweight and high-performance WAMP router built for flexibility and speed.
+We recommend using the [NXT](https://xconn.dev/nxt/) router, a lightweight and high-performance WAMP router built for flexibility and speed.
 
 ## Installation
 
-To install `xconn-typescript`, add the following to your `package.json` file:
+To install `xconn`, add the following to your `package.json` file:
 
 ```typescript
 "dependencies": {
