@@ -5,7 +5,7 @@ are secure.
 ## Prerequisites
 Before running a client, you need have a WAMP router running. The client needs to connect to a router to send and receive messages, so this step is essential.
 
-We recommend using a [Nxt](https://xconn.dev/nxt/) router, a lightweight and high-performance WAMP router built for flexibility and speed.
+We recommend using the [NXT](https://xconn.dev/nxt/) router, a lightweight and high-performance WAMP router built for flexibility and speed.
 
 ## Getting started
 Install xconn from pypi
