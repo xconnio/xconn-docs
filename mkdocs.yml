@@ -17,6 +17,7 @@ nav:
       - Swift: language-guides/swift.md
       - Rust: language-guides/rust.md
       - Kotlin: language-guides/kotlin.md
+      - Typescript: language-guides/typescript.md
 
 theme:
   name: material
