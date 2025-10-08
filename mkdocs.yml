@@ -11,13 +11,13 @@ nav:
   - NXT Router: nxt.md
   - Tutorial: tutorial.md
   - Language Guides:
-      - Go: language-guides/go.md
-      - Python: language-guides/python.md
       - Dart: language-guides/dart.md
-      - Swift: language-guides/swift.md
-      - Rust: language-guides/rust.md
-      - Kotlin: language-guides/kotlin.md
+      - Go: language-guides/go.md
       - JavaScript: language-guides/typescript.md
+      - Kotlin: language-guides/kotlin.md
+      - Python: language-guides/python.md
+      - Rust: language-guides/rust.md
+      - Swift: language-guides/swift.md
 
 theme:
   name: material
