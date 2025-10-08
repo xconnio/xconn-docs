@@ -1,4 +1,4 @@
-# Use for typescript
+# Use for JavaScript
 
 A TypeScript WAMP client library built for both browser and Node.js environments.
 
@@ -9,7 +9,7 @@ We recommend using a [Nxt](https://xconn.dev/nxt/) router, a lightweight and hig
 
 ## Installation
 
-To install `xconn-typescript`, add the following to your `package.json` file:
+To install `xconn`, add the following to your `package.json` file:
 
 ```typescript
 "dependencies": {
