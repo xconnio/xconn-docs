@@ -8,7 +8,7 @@ site_dir: site
 
 nav:
   - Overview: index.md
-  - Nxt Router: nxt.md
+  - NXT Router: nxt.md
   - Tutorial: tutorial.md
   - Language Guides:
       - Go: language-guides/go.md
