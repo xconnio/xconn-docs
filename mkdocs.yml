@@ -13,7 +13,7 @@ nav:
   - Language Guides:
       - Dart: language-guides/dart.md
       - Go: language-guides/go.md
-      - JavaScript: language-guides/typescript.md
+      - JavaScript: language-guides/javascript.md
       - Kotlin: language-guides/kotlin.md
       - Python: language-guides/python.md
       - Rust: language-guides/rust.md
