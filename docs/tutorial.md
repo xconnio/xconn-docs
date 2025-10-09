@@ -70,11 +70,11 @@ We recommend using a [NXT](https://xconn.dev/nxt/) router, a lightweight and hig
     }
     ```
 
-=== "Typescript"
-    To install `xconn-typescript`, add the following in your `package.json` file:
+=== "JavaScript"
+    To install `xconn-js`, add the following in your `package.json` file:
 
-    Typescript
-    ```typescript
+    JavaScript
+    ```javascript
     "dependencies": {
         "xconn": "github:xconnio/xconn-ts#13fbafb2c8e1e30a1cf13803fd207f5705270e24"
     }
@@ -181,9 +181,9 @@ We recommend using a [NXT](https://xconn.dev/nxt/) router, a lightweight and hig
         }
     ```
 
-=== "Typescript"
+=== "JavaScript"
 
-    ```typescript
+    ```javascript
     import {connectAnonymous} from "xconn";
 
 
@@ -319,9 +319,9 @@ We recommend using a [NXT](https://xconn.dev/nxt/) router, a lightweight and hig
     }
     ```
 
-=== "Typescript"
+=== "JavaScript"
 
-    ```typescript
+    ```javascript
     import {Event, Session} from "xconn";
 
 
@@ -429,9 +429,9 @@ We recommend using a [NXT](https://xconn.dev/nxt/) router, a lightweight and hig
     }
     ```
 
-=== "Typescript"
+=== "JavaScript"
 
-    ```typescript
+    ```javascript
     import {Session} from "xconn";
 
 
@@ -557,9 +557,9 @@ We recommend using a [NXT](https://xconn.dev/nxt/) router, a lightweight and hig
     }
     ```
 
-=== "Typescript"
+=== "JavaScript"
 
-    ```typescript
+    ```javascript
     import {Session, Invocation, Result} from "xconn";
 
 
@@ -660,9 +660,9 @@ We recommend using a [NXT](https://xconn.dev/nxt/) router, a lightweight and hig
     }
     ```
 
-=== "Typescript"
+=== "JavaScript"
 
-    ```typescript
+    ```javascript
     import {Session} from "xconn";
 
 
@@ -753,9 +753,9 @@ We recommend using a [NXT](https://xconn.dev/nxt/) router, a lightweight and hig
     val session = connectTicket("ws://localhost:8080/ws", "realm1", "authid", "ticket")
     ```
 
-=== "Typescript"
+=== "JavaScript"
 
-    ```Typescript
+    ```JavaScript
     import {connectTicket} from "xconn";
 
 
@@ -843,9 +843,9 @@ We recommend using a [NXT](https://xconn.dev/nxt/) router, a lightweight and hig
     val session = connectCRA("ws://localhost:8080/ws", "realm1", "authid", "secret")
     ```
 
-=== "Typescript"
+=== "JavaScript"
 
-    ```Typescript
+    ```JavaScript
     import {connectCRA} from "xconn";
 
 
@@ -931,9 +931,9 @@ We recommend using a [NXT](https://xconn.dev/nxt/) router, a lightweight and hig
     val session = connectCryptosign("ws://localhost:8080/ws", "realm1", "authid", "d850fff4ff199875c01d3e652e7205309dba2f053ae813c3d277609150adff13")
     ```
 
-=== "Typescript"
+=== "JavaScript"
 
-    ```Typescript
+    ```JavaScript
     import {connectCryptosign} from "xconn";
 
 
@@ -1049,9 +1049,9 @@ The library supports multiple serializers for data serialization. You can choose
     val session = client.connect("ws://localhost:8080/ws", "realm1")
     ```
 
-=== "Typescript"
+=== "JavaScript"
 
-    ``` typescript
+    ``` javascript
     import {Client, JSONSerializer} from "xconn";
 
 
@@ -1166,9 +1166,9 @@ The library supports multiple serializers for data serialization. You can choose
     val session = client.connect("ws://localhost:8080/ws", "realm1")
     ```
 
-=== "Typescript"
+=== "JavaScript"
 
-    ``` typescript
+    ``` javascript
     import {Client, CBORSerializer} from "xconn";
 
 
@@ -1283,9 +1283,9 @@ The library supports multiple serializers for data serialization. You can choose
     val session = client.connect("ws://localhost:8080/ws", "realm1")
     ```
 
-=== "Typescript"
+=== "JavaScript"
 
-    ``` typescript
+    ``` javascript
     import {Client, MsgPackSerializer} from "xconn";
 
 
