@@ -38,7 +38,7 @@ package io.xconn
 import io.xconn.xconn.connectAnonymous
 
 suspend fun main() {
-    val session = connectAnonymous()
+    val session = connectAnonymous("ws://localhost:8080/ws", "realm1")
 }
 ```
 
