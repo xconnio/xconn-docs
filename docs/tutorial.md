@@ -177,7 +177,7 @@ We recommend using a [NXT](https://xconn.dev/nxt/) router, a lightweight and hig
 
     fun main() =
         runBlocking {
-            val session = connectAnonymous()
+            val session = connectAnonymous("ws://localhost:8080/ws", "realm1")
         }
     ```
 
