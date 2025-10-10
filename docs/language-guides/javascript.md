@@ -1,6 +1,6 @@
 # Use for JavaScript
 
-A TypeScript WAMP client library built for both browser and Node.js environments.
+A JavaScript WAMP client library built for both browser and Node.js environments.
 
 ## Prerequisites
 Before creating or running a client, you must have a WAMP router running. The client needs to connect to a router to send and receive messages, so this step is essential.
