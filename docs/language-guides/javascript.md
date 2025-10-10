@@ -13,7 +13,7 @@ To install `xconn`, add the following to your `package.json` file:
 
 ```typescript
 "dependencies": {
-    "xconn": "github:xconnio/xconn-ts#13fbafb2c8e1e30a1cf13803fd207f5705270e24"
+    "xconn": "github:xconnio/xconn-js#13fbafb2c8e1e30a1cf13803fd207f5705270e24"
 }
 ```
 
