@@ -40,11 +40,11 @@ Once the session is established, you can perform WAMP actions. Below are example
 ### Subscribe to a topic
 
 ```swift
-func exampleSubscribe(_ session: Session) {
+func exampleSubscribe(_ session: Session) async {
     try await session.subscribe(topic: "io.xconn.example", endpoint: eventHandler)
 }
 
-func eventHandler(_ event: Event) {
+func eventHandler(_ event: Event) async {
     print("Event received: args=\(event.args), kwargs=\(event.kwargs), details=\(event.details)")
 }
 ```
@@ -52,7 +52,7 @@ func eventHandler(_ event: Event) {
 ### Publish to a topic
 
 ```swift
-func examplePublish(_ session: Session) {
+func examplePublish(_ session: Session) async {
     try await session.publish(
         topic: "io.xconn.example",
         args: ["test"],
@@ -64,7 +64,7 @@ func examplePublish(_ session: Session) {
 ### Register a procedure
 
 ```swift
-func exampleRegister(_ session: Session) {
+func exampleRegister(_ session: Session) async {
     try await session.register(procedure: "io.xconn.example", endpoint: echoHandler)
 }
 
@@ -76,7 +76,7 @@ func echoHandler(_ invocation: Invocation) -> Result {
 ### Call a procedure
 
 ```swift
-func exampleCall(_ session: Session) {
+func exampleCall(_ session: Session) async {
     let result = try await session.call(
         procedure: "io.xconn.echo",
         args: ["Hello World!"],
