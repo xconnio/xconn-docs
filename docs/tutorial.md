@@ -436,7 +436,7 @@ We recommend using a [NXT](https://xconn.dev/nxt/) router, a lightweight and hig
 
 
     async function examplePublish(session: Session) {
-        await session.publish("io.xconn.example", {args: ["test"], kwargs: {"key": "value"}});
+        await session.publish("io.xconn.example", ["test"], {"key": "value"});
     }
     ```
 
@@ -667,7 +667,7 @@ We recommend using a [NXT](https://xconn.dev/nxt/) router, a lightweight and hig
 
 
     async function exampleCall(session: Session) {
-        await session.call("io.xconn.echo", {args: [1, 2], kwargs: {"key": "value"}});
+        await session.call("io.xconn.echo", [1, 2], {"key": "value"});
     }
     ```
 
