@@ -256,11 +256,11 @@ We recommend using a [NXT](https://xconn.dev/nxt/) router, a lightweight and hig
 === "Swift"
 
     ``` swift
-    func exampleSubscribe(_ session: Session) {
+    func exampleSubscribe(_ session: Session) async {
         try await session.subscribe(topic: "io.xconn.example", endpoint: eventHandler)
     }
 
-    func eventHandler(_ event: Event) {
+    func eventHandler(_ event: Event) async {
         print("Event received: args=\(event.args), kwargs=\(event.kwargs), details=\(event.details)")
     }
     ```
@@ -376,7 +376,7 @@ We recommend using a [NXT](https://xconn.dev/nxt/) router, a lightweight and hig
 === "Swift"
 
     ``` swift
-    func examplePublish(_ session: Session) {
+    func examplePublish(_ session: Session) async {
         try await session.publish(
             topic: "io.xconn.example",
             args: ["test"],
@@ -500,7 +500,7 @@ We recommend using a [NXT](https://xconn.dev/nxt/) router, a lightweight and hig
 === "Swift"
 
     ``` swift
-    func exampleRegister(_ session: Session) {
+    func exampleRegister(_ session: Session) async {
         try await session.register(procedure: "io.xconn.echo", endpoint: echoHandler)
     }
 
@@ -614,7 +614,7 @@ We recommend using a [NXT](https://xconn.dev/nxt/) router, a lightweight and hig
 === "Swift"
 
     ``` swift
-    func exampleCall(_ session: Session) {
+    func exampleCall(_ session: Session) async {
         try await session.call(
             procedure: "io.xconn.echo",
             args: [1, 2],
